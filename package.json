@@ -1,0 +1,22 @@
+{
+  "name": "homework",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4",
+    "sqlite3": "^4.0.0"
+  },
+  "scripts": {
+    "db:drop": "node db/scripts/dropDb.js",
+    "db:seed": "node db/scripts/seed.js",
+    "server": "node server",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
