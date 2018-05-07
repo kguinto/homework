@@ -33,13 +33,13 @@ router.get('/users/', (req, res) => {
   db.all(`SELECT * FROM User ${whereClause}LIMIT ${pageSize}`, (err, data) => {
     if (err) {
       console.log(err);
-      res.status(400).json({message: 'Error'})
+      res.status(400).json({message: 'Error', data: []})
     }
 
     if (data && data.length === 0) {
-      res.status(404).send('null');
+      res.status(404).send({ message: 'null', data: []});
     } else {
-      res.status(200).send(data);   
+      res.status(200).send({ data });   
     }
   });
 });
