@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {API_HOST} from './../../constants';
-import PropTypes from 'prop-types';
 import UserList from './UserList';
 import SearchBar from './SearchBar';
 import PageSelect from './PageSelect';
+import Header from '../../sharedComponents/Header';
 
 class UserListView extends Component {
   constructor(props) {
@@ -13,6 +13,8 @@ class UserListView extends Component {
 
     this.fetchUsers = this.fetchUsers.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.viewNextPage = this.viewNextPage.bind(this);
+    this.viewPrevPage = this.viewPrevPage.bind(this);
   }
 
   componentDidMount() {
@@ -34,29 +36,37 @@ class UserListView extends Component {
     urlParams = (urlParams.length) ? `?${urlParams.join('&')}` : '/';
 
     fetch(`${API_HOST}/api/users${urlParams}`)
-    .then((res) => res.json())
-    .then(({ data, message }) => {
-      this.setState({ users: data || [] });
-    });
+      .then((res) => res.json())
+      .then(({ data, message }) => {
+        this.setState({ users: data || [] });
+      });
   }
 
   handleSearchChange (event) {
     if (event.keyCode === 13 && event.target.value.trim()) {
       this.setState({query: event.target.value.trim()}, this.fetchUsers);
     } else if (event.keyCode === 13) {
-      this.setState({ query: '' }, this.fetchUsers);
+      this.setState({ query: '', page: 1 }, this.fetchUsers);
+    }
+  }
+
+  viewNextPage() {
+    this.setState({ page: this.state.page + 1 }, this.fetchUsers);
+  }
+
+  viewPrevPage() {
+    if (this.state.page > 1) {
+      this.setState({ page: this.state.page - 1 }, this.fetchUsers);
     }
   }
 
   render() {
     return (
       <div className='view user-list-view'>
-        <header className="App-header">
-          Users
-        </header>
+        <Header title='Users' />
         <SearchBar handleSearchChange={this.handleSearchChange}/>
         <UserList users={this.state.users} viewUser={this.props.viewUser} />
-        <PageSelect />
+        <PageSelect viewNextPage={this.viewNextPage} viewPrevPage={this.viewPrevPage} currentPage={this.state.page}/>
       </div>
     );
   }
