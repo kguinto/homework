@@ -42,6 +42,18 @@
   border-bottom: 1px solid lightgray;
 }
 
+.user-entry .profile-circle{
+  float: left;
+}
+
+/* .user-entry .user-name{
+  width: 90%;
+} */
+
+.user-entry .right-arrow{
+  /* float: right; */
+}
+
 .user-entry-view .header {
   display: 'flex';
   background-color: #222;
@@ -49,4 +61,27 @@
   padding: .5em;
   color: white;
   flex-direction: row;
+}
+
+.user-entry-view .header .back-button {
+  float: left;
+}
+
+.profile-circle {
+  height: 1em;
+  width: 1em;
+  background-color: #888;
+  border-radius: 50%;
+}
+
+.search-bar input {
+  border: none;
+}
+
+.search-bar input:focus {
+  outline: none;
+}
+
+.page-select {
+  font-size: 2em;
 }
