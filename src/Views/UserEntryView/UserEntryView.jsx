@@ -1,4 +1,7 @@
 import React from 'react';
+import ProfileCircle from '../../sharedComponents/ProfileCircle';
+import Header from '../../sharedComponents/Header';
+import { height } from 'window-size';
 
 const UserEntryView = ({ user, viewUserList }) => (
   <div className='view user-entry-view'>
@@ -7,7 +10,7 @@ const UserEntryView = ({ user, viewUserList }) => (
       <div className='title'>Profile</div>
     </header>
     <div className='heading'>
-    
+      <div style={{ fontSize: '10em' }}><ProfileCircle /></div>
       <h1>{user.first_name} {user.last_name}</h1>
     </div>
     <div className='details'>
